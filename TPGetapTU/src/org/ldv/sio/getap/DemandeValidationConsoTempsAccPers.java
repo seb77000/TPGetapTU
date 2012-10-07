@@ -150,7 +150,7 @@ public class DemandeValidationConsoTempsAccPers {
 	 *            prend ses valeur dans :
 	 *            <ul>
 	 *            <li>0 - demande créée par l'élève</li>
-	 *            <li>1 - demande confimée par l'élève aprés modification du
+	 *            <li>1 - demande acceptée par l'élève aprés modification du
 	 *            professeur</li>
 	 *            <li>2 - demande rejetée par l'élève aprés modification du
 	 *            professeur</li>
