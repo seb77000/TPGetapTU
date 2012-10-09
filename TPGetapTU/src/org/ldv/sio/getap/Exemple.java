@@ -16,6 +16,18 @@ public class Exemple {
 				01L, "2012-2013", date, 240, prof, accPers, eleve, 0);
 		
 		System.out.println(dvctap);
+		dvctap.setEtat(4);
+		System.out.println(dvctap);
+		dvctap.setEtat(32);
+		System.out.println(dvctap);
+		dvctap.setEtat(4);
+		System.out.println(dvctap);
+		dvctap.setEtat(2048);
+		System.out.println(dvctap);
+		dvctap.setEtat(2);
+		System.out.println(dvctap);
+		dvctap.setEtat(32);
+		System.out.println(dvctap);
 
 	}
 }
