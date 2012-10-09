@@ -12,7 +12,7 @@ public class DemandeValidationConsoTempsAccPers {
 	private static final int DATE_MODIFIEE = 1024;
 	private static final int DUREE_MODIFIEE = 2048;
 	private static final int AP_MODIFIEE = 4096;
-
+	private DemandeValidationConsoTempsAccPers dvctap;
 	/**
 	 * Identifiant de la DCTAP
 	 */
