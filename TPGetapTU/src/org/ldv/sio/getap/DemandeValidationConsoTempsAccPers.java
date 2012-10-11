@@ -239,15 +239,15 @@ public class DemandeValidationConsoTempsAccPers {
 
 		return true;
 	}
-
-	public boolean demandeDureeModifieProf() {
-
-		return true;
-	}
-
-	public boolean demandeModifParProf() {
-
-		return true;
-	}
+//
+//	public boolean demandeDureeModifieProf() {
+//
+//		return true;
+//	}
+//
+//	public boolean demandeModifParProf() {
+//
+//		return true;
+//	}
 
 }
