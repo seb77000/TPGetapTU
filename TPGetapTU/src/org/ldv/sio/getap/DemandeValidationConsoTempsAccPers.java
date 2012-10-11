@@ -12,7 +12,7 @@ public class DemandeValidationConsoTempsAccPers {
 	private static final int DATE_MODIFIEE = 1024;
 	private static final int DUREE_MODIFIEE = 2048;
 	private static final int AP_MODIFIEE = 4096;
-
+	
 	/**
 	 * Identifiant de la DCTAP
 	 */
@@ -80,6 +80,10 @@ public class DemandeValidationConsoTempsAccPers {
 		this.accPers = accPers;
 		this.eleve = eleve;
 		this.etat = etat;
+	}
+	public DemandeValidationConsoTempsAccPers(Long id, String anneeScolaire, Date date,
+			Integer minutes, User prof, AccPersonalise accPers, User eleve) {	
+		this(id,anneeScolaire,date,minutes,prof,accPers,eleve,0);
 	}
 
 	public Long getId() {
@@ -167,6 +171,17 @@ public class DemandeValidationConsoTempsAccPers {
 	 */
 	public void setEtat(int etat) {
 		this.etat = etat;
+	}
+	
+	public boolean EtatInitial(){
+		
+		if (etat==0){
+			return true;}
+		else
+			return false;
+		
+		
+			
 	}
 
 	
