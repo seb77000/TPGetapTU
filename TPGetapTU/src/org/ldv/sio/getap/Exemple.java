@@ -2,7 +2,7 @@ package org.ldv.sio.getap;
 
 import java.sql.Date;
 
-public class Exemple extends DemandeValidationConsoTempsAccPers {
+public class Exemple{
 
 	public static void main(String Args[]) {
 		
