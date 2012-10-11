@@ -18,12 +18,12 @@ public class DemandeValidationConsoTempsAccPersTest extends TestCase{
 		Date date = Date.valueOf("2012-10-07");
 		AccPersonalise accPers = new AccPersonalise(0, "Salon du libre", 0, 02L);
 
-		dvctap = new DemandeValidationConsoTempsAccPers(01L, "2012-2013", date, 240, prof, accPers, eleve);
+		dvctap = new DemandeValidationConsoTempsAccPers(01L, "2012-2013", date, 240, prof, accPers, eleve, 0);
 
 	}
 
 	@Test
-	public void testEtatInitial() {
+	public void test() {
 		assertEquals("L'état est correcte", true, dvctap.EtatInitial());
 	}
 }

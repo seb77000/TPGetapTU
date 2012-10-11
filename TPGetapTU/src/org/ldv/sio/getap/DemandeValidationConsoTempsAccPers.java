@@ -10,7 +10,12 @@ import java.sql.Date;
 
 public class DemandeValidationConsoTempsAccPers {
 	private static final int DVCTAP_CREEE = 0;
+	private static final int DVCTAP_ACCEPTEE_MODIF_PROF = 1;
 	private static final int DVCTAP_REJETEE = 2;
+	private static final int DVCTAP_MODIFIEE_ELEVE = 4;
+	private static final int DVCTAP_ANNULEE_ELEVE = 8;
+	private static final int DVCTAP_VALIDEE_PROF = 32;
+	private static final int DVCTAP_DATE_MODIF_PROf = 64;
 	private static final int DATE_MODIFIEE = 1024;
 	private static final int DUREE_MODIFIEE = 2048;
 	private static final int AP_MODIFIEE = 4096;
@@ -60,19 +65,20 @@ public class DemandeValidationConsoTempsAccPers {
 	/**
 	 * Constructeur permettant de créer une demande complète.
 	 * 
-	 * @param id peut être null (moment de la creation)
-	 *            
+	 * @param id
+	 *            peut être null (moment de la creation)
+	 * 
 	 * @param anneeScolaire
 	 * @param date
 	 * @param minutes
 	 * @param prof
 	 * @param accPers
-	 * @param eleve 
+	 * @param eleve
 	 * @param etat
 	 */
-	public DemandeValidationConsoTempsAccPers(Long id, String anneeScolaire, Date date,
-			Integer minutes, User prof, AccPersonalise accPers, User eleve,
-			int etat) {
+	public DemandeValidationConsoTempsAccPers(Long id, String anneeScolaire,
+			Date date, Integer minutes, User prof, AccPersonalise accPers,
+			User eleve, int etat) {
 		super();
 		this.id = id;
 		this.anneeScolaire = anneeScolaire;
@@ -83,11 +89,12 @@ public class DemandeValidationConsoTempsAccPers {
 		this.eleve = eleve;
 		this.etat = etat;
 	}
-	
-	public DemandeValidationConsoTempsAccPers(Long id, String anneeScolaire, Date date,
-			Integer minutes, User prof, AccPersonalise accPers, User eleve) {
-		this(id,anneeScolaire,date,minutes,prof,accPers,eleve,0);
-		
+
+	public DemandeValidationConsoTempsAccPers(Long id, String anneeScolaire,
+			Date date, Integer minutes, User prof, AccPersonalise accPers,
+			User eleve) {
+		this(id, anneeScolaire, date, minutes, prof, accPers, eleve, 0);
+
 	}
 
 	public Long getId() {
@@ -177,7 +184,6 @@ public class DemandeValidationConsoTempsAccPers {
 		this.etat = etat;
 	}
 
-	
 	@Override
 	public String toString() {
 		return "DemandeConsoTempsAccPers [id=" + id + ", anneeScolaire="
@@ -185,25 +191,63 @@ public class DemandeValidationConsoTempsAccPers {
 				+ minutes + ", prof=" + prof + ", accPers=" + accPers
 				+ ", eleve=" + eleve + ", etat=" + etat + "]";
 	}
-	
-	public boolean EtatInitial(){
-		if(etat == 0){
+
+	public boolean EtatInitial() {
+		if (etat == 0) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
-	
-	public boolean demandeCreeeParLeleve(){
+
+	public boolean demandeCreeeParLeleve() {
 		boolean demandeCreee = (this.etat & DVCTAP_CREEE) == 0;
 		return demandeCreee;
 	}
-	
-	public boolean demandeRejeteeParLeleve(){
+
+	public boolean demandeAccepteEleveApresModifProf() {
+
+		return true;
+	}
+
+	public boolean demandeRejeteeParLeleve() {
 		boolean rejetee = (this.etat & DVCTAP_REJETEE) != 2;
 		return rejetee;
 	}
-	
-	
+
+	public boolean demandeModifParEleve() {
+
+		return true;
+	}
+
+	public boolean demandeAnnuleeEleve() {
+
+		return true;
+	}
+
+	public boolean demandeValideParProf() {
+
+		return true;
+	}
+
+	public boolean demandeRefuseParProf() {
+
+		return true;
+	}
+
+	public boolean demandeDateModifieProf() {
+
+		return true;
+	}
+
+	public boolean demandeDureeModifieProf() {
+
+		return true;
+	}
+
+	public boolean demandeModifParProf() {
+
+		return true;
+	}
 
 }
