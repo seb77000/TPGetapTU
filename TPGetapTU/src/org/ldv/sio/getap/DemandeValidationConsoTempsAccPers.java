@@ -9,6 +9,11 @@ import java.sql.Date;
  */
 
 public class DemandeValidationConsoTempsAccPers {
+	
+	private static final int DVCTAP_CREE = 1;
+	private static final int DVCTAP_REJETEE = 2;
+	private static final int AP_MODIFIEE_PAR_ELEVE = 4;
+	private static final int AP_ANNULE_PAR_ELEVE = 8;
 	private static final int DATE_MODIFIEE = 1024;
 	private static final int DUREE_MODIFIEE = 2048;
 	private static final int AP_MODIFIEE = 4096;
