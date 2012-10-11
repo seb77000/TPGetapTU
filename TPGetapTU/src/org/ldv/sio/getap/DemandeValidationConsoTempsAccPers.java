@@ -183,7 +183,48 @@ public class DemandeValidationConsoTempsAccPers {
 		
 			
 	}
-
+	public boolean demandeCreeeParEleve(){
+		
+		return true;
+	}
+	
+	public boolean demandeAccepteEleveApresModifProf(){
+		
+		return true;
+	}
+	public boolean demandeRejeteEleveApresModifProf(){
+		
+		return true;
+	}
+	public boolean demandeModifParEleve(){
+		
+		return true;
+	}
+	public boolean demandeAnnuleeEleve(){
+		
+		return true;
+	}
+	
+	public boolean demandeValideParProf(){
+		
+		return true;
+	}
+	public boolean demandeRefuseParProf(){
+		
+		return true;
+	}
+	public boolean demandeDateModifieProf(){
+		
+		return true;
+	}
+	public boolean demandeDureeModifieProf(){
+		
+		return true;
+	}
+	public boolean demandeModifParProf(){
+		
+		return true;
+	}
 	
 	@Override
 	public String toString() {
