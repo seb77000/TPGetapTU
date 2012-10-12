@@ -249,7 +249,7 @@ public class DemandeValidationConsoTempsAccPers {
 	}
 
 	public int ValideParProf() {
-		if (etat == DVCTAP_CREEE || etat == AP_MODIFIEE+1)
+		if (etat == DVCTAP_CREEE || etat == AP_MODIFIEE+1||etat == DATE_MODIFIEE+1 )
 			etat = this.etat | DVCTAP_VALIDEE_PROF;
 		else
 			throw new DVCTAPException("Changement de l'etat impossible.");
@@ -266,12 +266,14 @@ public class DemandeValidationConsoTempsAccPers {
 	}
 
 	
-//	public boolean DateModifieProf() {
-//		
-//		if(etat==)
-//		boolean demandeDateModifProf = (this.etat & DATE_MODIFIEE) != 0;
-//		return demandeDateModifProf;
-//	}
+	public int DateModifieProf() {
+		
+		if(etat==DVCTAP_CREEE)
+			etat= this.etat | DATE_MODIFIEE;
+		else
+			throw new DVCTAPException("Changement de l'etat impossible.");
+		return etat;
+	}
 
 	public boolean DureeModifieProf() {
 		boolean demandeDureeModifProf = (this.etat & DUREE_MODIFIEE) != 0;
