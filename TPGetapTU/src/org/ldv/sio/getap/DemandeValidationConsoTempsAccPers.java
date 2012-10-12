@@ -193,7 +193,7 @@ public class DemandeValidationConsoTempsAccPers {
 	}
 
 	public boolean EtatInitial() {
-		if (etat ==DVCTAP_CREEE ) {
+		if (etat == DVCTAP_CREEE) {
 			return true;
 		} else {
 			return false;
@@ -213,7 +213,8 @@ public class DemandeValidationConsoTempsAccPers {
 	}
 
 	public int AccepteEleveApresModifProf() {
-		if (etat == AP_MODIFIEE || etat==DUREE_MODIFIEE || etat==DATE_MODIFIEE)
+		if (etat == AP_MODIFIEE || etat == DUREE_MODIFIEE
+				|| etat == DATE_MODIFIEE)
 			etat = this.etat | DVCTAP_ACCEPTEE_MODIF_PROF;
 		else
 			throw new DVCTAPException("Changement de l'etat impossible.");
@@ -222,7 +223,8 @@ public class DemandeValidationConsoTempsAccPers {
 	}
 
 	public int RejeteeParLeleve() {
-		if (etat == AP_MODIFIEE || etat== DUREE_MODIFIEE || etat== DATE_MODIFIEE)
+		if (etat == AP_MODIFIEE || etat == DUREE_MODIFIEE
+				|| etat == DATE_MODIFIEE)
 			etat = this.etat | DVCTAP_REJETEE;
 		else
 			throw new DVCTAPException("Changement de l'etat impossible.");
@@ -232,7 +234,7 @@ public class DemandeValidationConsoTempsAccPers {
 
 	public int ModifParEleve() {
 
-		if (etat ==DVCTAP_CREEE)
+		if (etat == DVCTAP_CREEE)
 			etat = this.etat | DVCTAP_MODIFIEE_ELEVE;
 		else
 			throw new DVCTAPException("Changement de l'etat impossible.");
@@ -249,7 +251,7 @@ public class DemandeValidationConsoTempsAccPers {
 	}
 
 	public int ValideParProf() {
-		if (etat == DVCTAP_CREEE || etat == AP_MODIFIEE+1)
+		if (etat == DVCTAP_CREEE || etat == AP_MODIFIEE + 1)
 			etat = this.etat | DVCTAP_VALIDEE_PROF;
 		else
 			throw new DVCTAPException("Changement de l'etat impossible.");
@@ -265,22 +267,81 @@ public class DemandeValidationConsoTempsAccPers {
 		return etat;
 	}
 
-	
-//	public boolean DateModifieProf() {
-//		
-//		if(etat==)
-//		boolean demandeDateModifProf = (this.etat & DATE_MODIFIEE) != 0;
-//		return demandeDateModifProf;
-//	}
-
-	public boolean DureeModifieProf() {
-		boolean demandeDureeModifProf = (this.etat & DUREE_MODIFIEE) != 0;
-		return demandeDureeModifProf;
+	public int DateModifieProf() {
+		if (etat == DVCTAP_CREEE || etat == DATE_MODIFIEE
+				|| etat == DUREE_MODIFIEE || etat == AP_MODIFIEE)
+			etat = this.etat | DATE_MODIFIEE;
+		else
+			throw new DVCTAPException("Changement de l'etat impossible.");
+		return etat;
 	}
 
-	public boolean ModifParProf() {
-		boolean demandeModifParProf = (this.etat & AP_MODIFIEE) != 0;
-		return demandeModifParProf;
+	public int DureeModifieProf() {
+		if (etat == DVCTAP_CREEE || etat == DUREE_MODIFIEE
+				|| etat == DATE_MODIFIEE || etat == AP_MODIFIEE)
+			etat = this.etat | DUREE_MODIFIEE;
+		else
+			throw new DVCTAPException("Changement de l'etat impossible.");
+		return etat;
+	}
+
+	public int ModifParProf() {
+		if (etat == DVCTAP_CREEE || etat == AP_MODIFIEE
+				|| etat == DATE_MODIFIEE || etat == DUREE_MODIFIEE)
+			etat = this.etat | AP_MODIFIEE;
+		else
+			throw new DVCTAPException("Changement de l'etat impossible.");
+		return etat;
+	}
+
+	public boolean isCreeeParLeleve() {
+		boolean isCreee = (this.etat & DVCTAP_CREEE) == 0;
+		return isCreee;
+	}
+
+	public boolean isAccepteEleveApresModifProf() {
+		boolean isAccepteeEleve = (this.etat & DVCTAP_ACCEPTEE_MODIF_PROF) != 0;
+		return isAccepteeEleve;
+	}
+
+	public boolean isRejeteeParLeleve() {
+		boolean isRejetee = (this.etat & DVCTAP_REJETEE) != 0;
+		return isRejetee;
+	}
+
+	public boolean isModifParEleve() {
+		boolean isModifEleve = (this.etat & DVCTAP_MODIFIEE_ELEVE) != 0;
+		return isModifEleve;
+	}
+
+	public boolean isAnnuleeEleve() {
+		boolean isAnnuleeEleve = (this.etat & DVCTAP_ANNULEE_ELEVE) != 0;
+		return isAnnuleeEleve;
+	}
+
+	public boolean isValideParProf() {
+		boolean isValideProf = (this.etat & DVCTAP_VALIDEE_PROF) != 0;
+		return isValideProf;
+	}
+
+	public boolean isRefuseParProf() {
+		boolean isRefusProf = (this.etat & DVCTAP_REFUS_PROF) != 0;
+		return isRefusProf;
+	}
+
+	public boolean isDateModifieProf() {
+		boolean isDateModifProf = (this.etat & DATE_MODIFIEE) != 0;
+		return isDateModifProf;
+	}
+
+	public boolean isDureeModifieProf() {
+		boolean isDureeModifProf = (this.etat & DUREE_MODIFIEE) != 0;
+		return isDureeModifProf;
+	}
+
+	public boolean isModifParProf() {
+		boolean isModifParProf = (this.etat & AP_MODIFIEE) != 0;
+		return isModifParProf;
 	}
 
 }
