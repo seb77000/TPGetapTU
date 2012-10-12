@@ -200,104 +200,126 @@ public class DemandeValidationConsoTempsAccPers {
 		}
 	}
 
-	public int CreeeParLeleve() {
 
-		if (etat == DVCTAP_CREEE)
-			etat = etat | DVCTAP_CREEE;
-
-		else
-			throw new DVCTAPException("Changement de l'etat impossible.");
-
-		return etat;
-
+	public void valideeParLeProfesseur() throws DVCTAPException {
+			if (!this.isAnnuleeEleve() && !this.isRefuseParProf()
+					&& !this.isAccepteEleveApresModifProf() && !this.isRejeteeParLeleve()
+					&& !this.isValideParProf()) {
+				this.etat = this.etat | DVCTAP_VALIDEE_PROF;
+			}else{
+				throw new DVCTAPException("");
+			}
 	}
 
-	public int AccepteEleveApresModifProf() {
-		if (etat == AP_MODIFIEE || etat == DUREE_MODIFIEE
-				|| etat == DATE_MODIFIEE)
-			etat = this.etat | DVCTAP_ACCEPTEE_MODIF_PROF;
-		else
-			throw new DVCTAPException("Changement de l'etat impossible.");
 
-		return etat;
+	public void refuseeParLeProfesseur() throws DVCTAPException {
+		if (!this.isAnnuleeEleve() && !this.isValideParProf()
+				&& !this.isAccepteEleveApresModifProf() && !this.isRejeteeParLeleve()
+				&& !this.isRefuseParProf()) {
+			this.etat = this.etat | DVCTAP_REFUS_PROF ;
+		}else{
+			throw new DVCTAPException("");
+		}
 	}
 
-	public int RejeteeParLeleve() {
-		if (etat == AP_MODIFIEE || etat == DUREE_MODIFIEE
-				|| etat == DATE_MODIFIEE)
-			etat = this.etat | DVCTAP_REJETEE;
-		else
-			throw new DVCTAPException("Changement de l'etat impossible.");
 
-		return etat;
+	public void annuleeParEleve() throws DVCTAPException {
+		if (!this.isValideParProf() && !this.isRefuseParProf()
+				&& !this.isAccepteEleveApresModifProf() && !this.isRejeteeParLeleve()
+				&& !this.isModifParProf() && !this.isDureeModifieProf()
+				&& !this.isDateModifieProf()
+				&& !this.isAnnuleeEleve()) {
+		this.etat = this.etat | DVCTAP_ANNULEE_ELEVE;
+		}else{
+			throw new DVCTAPException("");
+		}
+}
+
+
+	public void modifieeParEleve() throws DVCTAPException {
+		if (!this.isValideParProf() && !this.isRefuseParProf()
+				&& !this.isAccepteEleveApresModifProf() && !this.isRejeteeParLeleve()
+				&& !this.isModifParProf() && !this.isDureeModifieProf()
+				&& !this.isDateModifieProf() && !this.isAnnuleeEleve()) {
+			this.etat = this.etat | DVCTAP_MODIFIEE_ELEVE;
+		}else{
+			throw new DVCTAPException("");
+		}
 	}
 
-	public int ModifParEleve() {
 
-		if (etat == DVCTAP_CREEE)
-			etat = this.etat | DVCTAP_MODIFIEE_ELEVE;
-		else
-			throw new DVCTAPException("Changement de l'etat impossible.");
-
-		return etat;
+	public void modifieeDateParLeProfesseur() throws DVCTAPException {
+		if (!this.isValideParProf() && !this.isRefuseParProf()
+				&& !this.isAccepteEleveApresModifProf() && !this.isRejeteeParLeleve()
+				&& !this.isAnnuleeEleve() && !this.isRefuseParProf()
+				&& !this.isValideParProf()) {
+			this.etat = this.etat | DATE_MODIFIEE;
+		}else{
+			throw new DVCTAPException("");
+		}
 	}
 
-	public int AnnuleeEleve() {
-		if (etat == DVCTAP_CREEE)
-			etat = this.etat | DVCTAP_ANNULEE_ELEVE;
-		else
-			throw new DVCTAPException("Changement de l'etat impossible.");
-		return etat;
+
+	public void modifieeDureeParLeProfesseur() throws DVCTAPException {
+		if (!this.isValideParProf() && !this.isRefuseParProf()
+				&& !this.isAccepteEleveApresModifProf() && !this.isRejeteeParLeleve()
+				&& !this.isAnnuleeEleve() && !this.isRefuseParProf()
+				&& !this.isValideParProf()) {
+			this.etat = this.etat | DUREE_MODIFIEE;
+		}else{
+			throw new DVCTAPException("");
+		}
 	}
 
-	public int ValideParProf() {
 
-		if (etat == DVCTAP_CREEE || etat == AP_MODIFIEE + 1
-				|| etat == DATE_MODIFIEE + 1)
-
-			etat = this.etat | DVCTAP_VALIDEE_PROF;
-		else
-			throw new DVCTAPException("Changement de l'etat impossible.");
-
-		return etat;
+	public void modifieeAPParLeProfesseur() throws DVCTAPException {
+		if (!this.isValideParProf() && !this.isRefuseParProf()
+				&& !this.isAccepteEleveApresModifProf() && !this.isRejeteeParLeleve()
+				&& !this.isAnnuleeEleve() && !this.isRefuseParProf()
+				&& !this.isValideParProf()) {
+			this.etat = this.etat | AP_MODIFIEE;
+		}else{
+			throw new DVCTAPException("");
+		}
 	}
 
-	public int RefuseParProf() {
-		if (etat == DVCTAP_CREEE)
-			etat = this.etat | DVCTAP_REFUS_PROF;
-		else
-			throw new DVCTAPException("Changement de l'etat impossible.");
-		return etat;
+
+	public void rejeteParEleve() throws DVCTAPException {
+		if (!this.isValideParProf()
+				&& !this.isRefuseParProf()
+				&& !this.isRejeteeParLeleve()
+				&& !this.isAnnuleeEleve()
+				&& !this.isRefuseParProf()
+				&& !this.isValideParProf()
+				&& !this.isRejeteeParLeleve()
+				&& (this.isModifParProf() || this.isDateModifieProf() || this
+						.isDureeModifieProf())) {
+			this.etat = this.etat | DVCTAP_REJETEE;
+		}else{
+			throw new DVCTAPException("");
+		}
 	}
 
-	public int DateModifieProf() {
-		if (etat == DVCTAP_CREEE || etat == DATE_MODIFIEE
-				|| etat == DUREE_MODIFIEE || etat == AP_MODIFIEE)
-			etat = this.etat | DATE_MODIFIEE;
-		else
-			throw new DVCTAPException("Changement de l'etat impossible.");
-		return etat;
 
+	public boolean accepteeParEleve() throws DVCTAPException {
+		boolean verif = true;
+		if (!this.isValideParProf()
+				&& !this.isRefuseParProf()
+				&& !this.isRejeteeParLeleve()
+				&& !this.isAnnuleeEleve()
+				&& !this.isRefuseParProf()
+				&& !this.isValideParProf()
+				&& !this.isAccepteEleveApresModifProf()
+				&& (this.isModifParProf() || this.isDateModifieProf() || this
+						.isDureeModifieProf())) {
+			this.etat = this.etat | DVCTAP_ACCEPTEE_MODIF_PROF;
+			verif = true;
+		}else{
+			System.out.println("Erreur lors du changement de l'état !");
+			verif = false;
+		}
+		return verif;
 	}
-
-	public int DureeModifieProf() {
-		if (etat == DVCTAP_CREEE || etat == DUREE_MODIFIEE
-				|| etat == DATE_MODIFIEE || etat == AP_MODIFIEE)
-			etat = this.etat | DUREE_MODIFIEE;
-		else
-			throw new DVCTAPException("Changement de l'etat impossible.");
-		return etat;
-	}
-
-	public int ModifParProf() {
-		if (etat == DVCTAP_CREEE || etat == AP_MODIFIEE
-				|| etat == DATE_MODIFIEE || etat == DUREE_MODIFIEE)
-			etat = this.etat | AP_MODIFIEE;
-		else
-			throw new DVCTAPException("Changement de l'etat impossible.");
-		return etat;
-	}
-
 	public boolean isCreeeParLeleve() {
 		boolean isCreee = (this.etat & DVCTAP_CREEE) == 0;
 		return isCreee;
