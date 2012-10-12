@@ -1,11 +1,7 @@
 package org.ldv.sio.getap;
 
-import static org.junit.Assert.*;
-
 import java.sql.Date;
-
 import junit.framework.TestCase;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,15 +17,16 @@ public class DemandeValidationConsoTempsAccPersTest extends TestCase{
 		User prof = new User(02L, "Olivier", "Capuozzo", classe, "professeur");
 		Date date = Date.valueOf("2012-10-07");
 		AccPersonalise accPers = new AccPersonalise(0, "Salon du libre", 0, 02L);
-		dvctap = new DemandeValidationConsoTempsAccPers(
-				01L, "2012-2013", date, 240, prof, accPers, eleve);
+
+		dvctap = new DemandeValidationConsoTempsAccPers(01L, "2012-2013", date, 240, prof, accPers, eleve, 2048);
 	}
 
 	@Test
 	public void test() {
+		dvctap.AccepteEleveApresModifProf();
+		System.out.println(dvctap);
+		
 
-		assertTrue("L'etat n'est pas initil", dvctap.EtatInitial());
 
 	}
-
 }
