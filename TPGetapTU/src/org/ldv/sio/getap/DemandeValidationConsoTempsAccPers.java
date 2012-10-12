@@ -90,7 +90,10 @@ public class DemandeValidationConsoTempsAccPers {
 		this.eleve = eleve;
 		this.etat = etat;
 	}
-
+/**Constructeur permettant d'initialiser l'etat a 0 lors de la creation de la dvctap
+ * 
+ * 
+ */
 	public DemandeValidationConsoTempsAccPers(Long id, String anneeScolaire,
 			Date date, Integer minutes, User prof, AccPersonalise accPers,
 			User eleve) {
@@ -199,7 +202,10 @@ public class DemandeValidationConsoTempsAccPers {
 			return false;
 		}
 	}
-
+/**Methode permettant de passer l'etat a DVCTAP_CREE  plus l'etat précedent
+ * 
+ * 
+ */
 	public void CreeeParLeleve() {
 		if (!this.isAnnuleeEleve() && !this.isRefuseParProf()
 				&& !this.isAccepteEleveApresModifProf()
@@ -208,31 +214,39 @@ public class DemandeValidationConsoTempsAccPers {
 				&& !this.isDateModifieProf() && !this.isDureeModifieProf()) {
 			this.etat = this.etat | DVCTAP_CREEE;
 		}else{
-			throw new DVCTAPException("");
+			throw new DVCTAPException("Erreur lors du changement de l'état !");
 		}
 	}
-
-	public void valideeParLeProfesseur() throws DVCTAPException {
+	
+	
+	/**Methode permettant de passer l'état à DVCTAP_PROF  plus l'etat précedent
+	 * L'etat refuse de changer si sa valeur précédente était DVCTAP_ANNULEE_ELEVE, DVCTAP_REFUS_PROF,DVCTAP_REJETEE,DVCTAP_VALIDEE_PROF
+	 */
+	public void ValideParProf() throws DVCTAPException {
 		if (!this.isAnnuleeEleve() && !this.isRefuseParProf()
-				&& !this.isAccepteEleveApresModifProf()
 				&& !this.isRejeteeParLeleve() && !this.isValideParProf()) {
 			this.etat = this.etat | DVCTAP_VALIDEE_PROF;
 		} else {
-			throw new DVCTAPException("");
+			throw new DVCTAPException("Erreur lors du changement de l'état !");
 		}
 	}
-
-	public void refuseeParLeProfesseur() throws DVCTAPException {
+	
+	/**Methode permettant de passer l'état à DVCTAP_REFUS_PROF plus l'etat précedent
+	 * 
+	 */
+	public void RefuseParProf() throws DVCTAPException {
 		if (!this.isAnnuleeEleve() && !this.isValideParProf()
 				&& !this.isAccepteEleveApresModifProf()
 				&& !this.isRejeteeParLeleve() && !this.isRefuseParProf()) {
 			this.etat = this.etat | DVCTAP_REFUS_PROF;
 		} else {
-			throw new DVCTAPException("");
+			throw new DVCTAPException("Erreur lors du changement de l'état !");
 		}
 	}
-
-	public void annuleeParEleve() throws DVCTAPException {
+	/**Methode permettant de passer l'état à DVCTAP_ANNULEE_ELEVE plus l'etat précedent
+	 * 
+	 */
+	public void AnnuleeEleve() throws DVCTAPException {
 		if (!this.isValideParProf() && !this.isRefuseParProf()
 				&& !this.isAccepteEleveApresModifProf()
 				&& !this.isRejeteeParLeleve() && !this.isModifParProf()
@@ -240,10 +254,13 @@ public class DemandeValidationConsoTempsAccPers {
 				&& !this.isAnnuleeEleve()) {
 			this.etat = this.etat | DVCTAP_ANNULEE_ELEVE;
 		} else {
-			throw new DVCTAPException("");
+			throw new DVCTAPException("Erreur lors du changement de l'état !");
 		}
 	}
 
+	/**Methode permettant de passer l'état à DVCTAP_MODIFIEE_ELEVE plus l'etat précedent
+	 * 
+	 */
 	public void modifieeParEleve() throws DVCTAPException {
 		if (!this.isValideParProf() && !this.isRefuseParProf()
 				&& !this.isAccepteEleveApresModifProf()
@@ -252,10 +269,12 @@ public class DemandeValidationConsoTempsAccPers {
 				&& !this.isAnnuleeEleve()) {
 			this.etat = this.etat | DVCTAP_MODIFIEE_ELEVE;
 		} else {
-			throw new DVCTAPException("");
+			throw new DVCTAPException("Erreur lors du changement de l'état !");
 		}
 	}
-
+	/**Methode permettant de passer l'état à DATE_MODIFIEE plus l'etat précedent
+	 * 
+	 */
 	public void DateModifieProf() throws DVCTAPException {
 		if (!this.isValideParProf() && !this.isRefuseParProf()
 				&& !this.isAccepteEleveApresModifProf()
@@ -263,10 +282,12 @@ public class DemandeValidationConsoTempsAccPers {
 				&& !this.isRefuseParProf() && !this.isValideParProf()) {
 			this.etat = this.etat | DATE_MODIFIEE;
 		} else {
-			throw new DVCTAPException("");
+			throw new DVCTAPException("Erreur lors du changement de l'état !");
 		}
 	}
-
+	/**Methode permettant de passer l'état à DUREE_MODIFIEE plus l'etat précedent
+	 * 
+	 */
 	public void modifieeDureeParLeProfesseur() throws DVCTAPException {
 		if (!this.isValideParProf() && !this.isRefuseParProf()
 				&& !this.isAccepteEleveApresModifProf()
@@ -274,10 +295,12 @@ public class DemandeValidationConsoTempsAccPers {
 				&& !this.isRefuseParProf() && !this.isValideParProf()) {
 			this.etat = this.etat | DUREE_MODIFIEE;
 		} else {
-			throw new DVCTAPException("");
+			throw new DVCTAPException("Erreur lors du changement de l'état !");
 		}
 	}
-
+	/**Methode permettant de passer l'état à AP_MODIFIEE plus l'etat précedent
+	 * 
+	 */
 	public void modifieeAPParLeProfesseur() throws DVCTAPException {
 		if (!this.isValideParProf() && !this.isRefuseParProf()
 				&& !this.isAccepteEleveApresModifProf()
@@ -285,11 +308,13 @@ public class DemandeValidationConsoTempsAccPers {
 				&& !this.isRefuseParProf() && !this.isValideParProf()) {
 			this.etat = this.etat | AP_MODIFIEE;
 		} else {
-			throw new DVCTAPException("");
+			throw new DVCTAPException("Erreur lors du changement de l'état !");
 		}
 	}
-
-	public void rejeteParEleve() throws DVCTAPException {
+	/**Methode permettant de passer l'état à DVCTAP_REJETEE plus l'etat précedent
+	 * 
+	 */
+	public void RejeteeParLeleve() throws DVCTAPException {
 		if (!this.isValideParProf()
 				&& !this.isRefuseParProf()
 				&& !this.isRejeteeParLeleve()
@@ -301,11 +326,13 @@ public class DemandeValidationConsoTempsAccPers {
 						.isDureeModifieProf())) {
 			this.etat = this.etat | DVCTAP_REJETEE;
 		} else {
-			throw new DVCTAPException("");
+			throw new DVCTAPException("Erreur lors du changement de l'état !");
 		}
 	}
-
-	public boolean accepteeParEleve() throws DVCTAPException {
+	/**Methode permettant de passer l'état à DVCTAP_ACCEPTEE_MODIF_PROF plus l'etat précedent
+	 * 
+	 */
+	public boolean AccepteEleveApresModifProf() throws DVCTAPException {
 		boolean verif = true;
 		if (!this.isValideParProf()
 				&& !this.isRefuseParProf()
@@ -324,6 +351,13 @@ public class DemandeValidationConsoTempsAccPers {
 		}
 		return verif;
 	}
+	
+	
+	/**Methodes permettant de verifier la valeur de l'etat.
+	 * L'etat initial avec le changement de DVCTAP ne doit pas valoir 0 sauf lors de la création de la demande.
+	 * 
+	 * 
+	 */
 
 	public boolean isCreeeParLeleve() {
 		boolean isCreee = (this.etat & DVCTAP_CREEE) == 0;

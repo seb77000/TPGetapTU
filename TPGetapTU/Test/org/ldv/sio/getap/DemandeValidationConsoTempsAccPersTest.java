@@ -8,7 +8,9 @@ import org.junit.Test;
 public class DemandeValidationConsoTempsAccPersTest extends TestCase {
 
 	private DemandeValidationConsoTempsAccPers dvctap;
-
+/**
+ * Initialisation de dvctap
+ */
 	@Before
 	public void setUp() throws Exception {
 		Classe classe = new Classe(1, "SIO 22");
@@ -20,7 +22,9 @@ public class DemandeValidationConsoTempsAccPersTest extends TestCase {
 		dvctap = new DemandeValidationConsoTempsAccPers(01L, "2012-2013", date,
 				240, prof, accPers, eleve);
 	}
-
+	/**
+	 * Test permettant de verifier le bon fonctionnement lors changement de la dvctap apres la modification du professeur
+	 */
 	@Test
 	public void testAccepteEleveApresModifProf() {
 
@@ -33,7 +37,9 @@ public class DemandeValidationConsoTempsAccPersTest extends TestCase {
 			throw new DVCTAPException("Changement impossible");
 		}
 	}
-
+	/**
+	 * Test permettant de verifier si la modification de la date par le professeur fonctionne.
+	 */
 	public void testModifProf() {
 		try {
 			dvctap.CreeeParLeleve();
@@ -48,13 +54,18 @@ public class DemandeValidationConsoTempsAccPersTest extends TestCase {
 		}
 
 	}
-
+	/**
+	 * Test permettant de verifier si une dvctap peu etre valide par le professeur.
+	 */
 	public void testValide() {
 		try {
 			dvctap.CreeeParLeleve();
+			dvctap.modifieeAPParLeProfesseur();
 			dvctap.DateModifieProf();
 			dvctap.AccepteEleveApresModifProf();
+			dvctap.isDureeModifieProf();
 			dvctap.ValideParProf();
+			
 
 		}
 
@@ -64,7 +75,9 @@ public class DemandeValidationConsoTempsAccPersTest extends TestCase {
 
 		}
 	}
-
+	/**
+	 * Test permettant de verifier si le refus d'une dvctap par un professeur est possible.
+	 */
 	public void testRefusProf() {
 		try {
 			dvctap.CreeeParLeleve();
@@ -78,7 +91,9 @@ public class DemandeValidationConsoTempsAccPersTest extends TestCase {
 
 		}
 	}
-
+	/**
+	 * Test permettant de verifier si l'élève peu annule sa demande
+	 */
 	public void testAnnuleParEleve() {
 		try {
 			dvctap.CreeeParLeleve();
@@ -92,7 +107,9 @@ public class DemandeValidationConsoTempsAccPersTest extends TestCase {
 
 		}
 	}
-
+	/**
+	 * Test permettant de verifier si l'utilisateur peu rejete une demande.
+	 */
 	public void testRejete() {
 		try {
 			dvctap.CreeeParLeleve();
