@@ -22,10 +22,18 @@ public class DemandeValidationConsoTempsAccPersTest extends TestCase {
 		dvctap = new DemandeValidationConsoTempsAccPers(01L, "2012-2013", date,
 				240, prof, accPers, eleve);
 	}
+	
+	@Test
+	/**
+	 * Test du bon état de l'objet à sa création
+	 */
+	public void testEtatInitial() {
+		assertTrue("Etat initial", dvctap.EtatInitial());
+	}
+	
 	/**
 	 * Test permettant de verifier le bon fonctionnement lors changement de la dvctap apres la modification du professeur
 	 */
-	@Test
 	public void testAccepteEleveApresModifProf() {
 
 		try {
